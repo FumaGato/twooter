@@ -5,13 +5,47 @@
 {% endblock %}
 
 {% block body %}
-<h2>Login (not an actual login)</h2>
-<p>Helo and welcome to twoo:3r !!! <br>
-    But first enter ur name plsss</p>
-<p>Suggestion: {{nm_suggestion}}</p>
-<form action="/login" method="POST">
-    <input type="text" name="username" placeholder="Enter name here" required>
-    <input type="submit" value="Enter now !!!">
-</form>
-<a href="https://youtu.be/dQw4w9WgXcQ?si=eTnQIvQ7HFBQSJL4" target="_blank"><button>I'm just gonna leave</button></a>
+<h2>Login</h2>
+<div class="main-container">
+    <div class="twoots-container">
+        <div class="twoot">
+            <div class="twoot-head">
+                <div class="twoot-profile" style="display: flex; align-items: center; gap: 10px;">
+                    <img class="twoot-pfp" src="/static/images/fuma-pfp.jpeg">
+                    <h4 class="twoot-user">Fuma</h4>
+                </div>
+                <a href="https://github.com/FumaGato" target="_blank">
+                    <img src="/static/images/github-logo.png" alt="My GitHub" class="github" style="margin-top: 12px;">
+                </a>
+            </div>
+            <p style="text-align: center;">Welcome to twoo:3r !!! <br>
+                Before continuing you need to login first. <br>
+                (Just type in your name bellow)</p>
+            <div class="twoot-foot">
+                <p></p>
+                <p></p>
+            </div>
+        </div>
+        <div class="twoot">
+            <div>
+                <p style="text-align: center;">v V V V v</p>
+            </div>
+            <form action="/login" method="POST">
+                <div style="display: flex; align-items: center; gap: 10px; justify-content: space-evenly;">
+                    <img src="/static/images/default-pfp.jpg" alt="pfp" style="width: 88.88px; height: 88.88px;">
+                    <div style="border: 3px solid black; border-radius: 10px; padding: 4px;">
+                        <input type="text" name="username" placeholder="Enter your name here" autocomplete="off"
+                            required style="font-size: 1.2rem; border-style: none;">
+                    </div>
+                    <input type="submit" value="Enter now !!" class="submit-button">
+                </div>
+            </form>
+            <div>
+                <p style="text-align: center;">Suggestion: {{nm_suggestion}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="https://youtu.be/dQw4w9WgXcQ?si=eTnQIvQ7HFBQSJL4" target="_blank"><button class="submit-button">I'm just gonna
+        leave</button></a>
 {% endblock %}

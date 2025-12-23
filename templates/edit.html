@@ -1,34 +1,35 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>twoo:3r | Post</title>
+<title>twoo:3r | Edit</title>
 {% endblock %}
 
 {% block body %}
-<h2>Post</h2>
+<h2>Edit</h2>
 <div class="main-container">
     <div class="twoot">
         <div class="twoot-head">
             <div class="twoot-profile" style="display: flex; align-items: center; gap: 10px;">
-                {% if user == "Fuma" %}
+                {% if twoot.user == "Fuma" %}
                 <img class="twoot-pfp" src="/static/images/fuma-pfp.jpeg">
-                {% elif user == "Vyn" %}
+                {% elif twoot.user == "Vyn" %}
                 <img class="twoot-pfp" src="/static/images/vyn-pfp.jpg">
-                {% elif user == "Mafu" %}
+                {% elif twoot.user == "Mafu" %}
                 <img class="twoot-pfp" src="/static/images/mafu-pfp.jpg">
                 {% else %}
                 <img class="twoot-pfp" src="/static/images/default-pfp.jpg">
                 {% endif %}
-                <h4 class="twoot-user">{{user}}</h4>
+                <h4 class="twoot-user">{{twoot.user}}</h4>
             </div>
             <p></p>
         </div>
-        <form action="/twoot" method="POST">
-            <input type="text" name="content" maxlength="140" placeholder="Type something here" autocomplete="off"
-                required style="border-style: none; height: 60px; min-width: 585px;">
+        <form action="/edit/{{twoot.id}}" method="POST">
+            <input type="text" name="content" maxlength="140" placeholder="Type something here"
+                value="{{twoot.content}}" autocomplete="off" required
+                style="border-style: none; height: 60px; min-width: 585px;">
             <div class="twoot-foot">
                 <p></p>
-                <input type="submit" value="Post" class="submit-button">
+                <input type="submit" value="Done" class="submit-button">
             </div>
         </form>
     </div>

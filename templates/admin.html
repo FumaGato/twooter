@@ -5,36 +5,14 @@
 {% endblock %}
 
 {% block body %}
-<h2>Home</h2>
+<h2>Admin</h2>
 <div class="main-container">
-    <div class="upper-container">
-        <a href="{{ url_for('logout')}}">
-            <img src="/static/images/logout-icon.png" alt="Logout" class="action-button">
-        </a>
-        <div class="twoot-profile" style="display: flex; align-items: center; gap: 10px;">
-            {% if user == "Fuma" %}
-            <img class="twoot-pfp" src="/static/images/fuma-pfp.jpeg">
-            {% elif user == "Vyn" %}
-            <img class="twoot-pfp" src="/static/images/vyn-pfp.jpg">
-            {% elif user == "Mafu" %}
-            <img class="twoot-pfp" src="/static/images/mafu-pfp.jpg">
-            {% else %}
-            <img class="twoot-pfp" src="/static/images/default-pfp.jpg">
-            {% endif %}
-            <h4 class="twoot-user">{{user}}</h4>
-        </div>
-        {% if user == "fumafuamuf2101" %}
-        <a href="{{url_for('admin')}}">
-            <img src="/static/images/admin-icon.png" alt="Admin" class="action-button">
-        </a>
-        {% else %}
-        <a href="{{url_for('twoot')}}">
-            <img src="/static/images/post-icon.png" alt="Post" class="action-button">
-        </a>
-        {% endif %}
+    <div style="display: flex; justify-content: center;">
+        <img class="twoot-pfp" src="/static/images/pic-1.jpeg" style="width: auto; height: 180px;">
     </div>
+    <p style="text-align: center;">Edit and delete twoots</p>
     <div class="twoots-container">
-        {% if twoots|length < 1 %} <h2>No twoots ;w;</h2>
+        {% if twoots|length < 1 %} <h2>No twoots</h2>
             {% else %}
             {% for twoot in twoots %}
             <div class="twoot">
@@ -44,28 +22,22 @@
                         <img class="twoot-pfp" src="/static/images/fuma-pfp.jpeg">
                         {% elif twoot.user == "Vyn" %}
                         <img class="twoot-pfp" src="/static/images/vyn-pfp.jpg">
-                        {% elif twoot.user == "Mafu" %}
-                        <img class="twoot-pfp" src="/static/images/mafu-pfp.jpg">
                         {% else %}
                         <img class="twoot-pfp" src="/static/images/default-pfp.jpg">
                         {% endif %}
                         <h4 class="twoot-user">{{twoot.user}}</h4>
                     </div>
-                    {% if user == twoot.user %}
                     <div class="twoot-update" style="display: flex; align-items: center; gap: 10px;">
                         <a href="/edit/{{twoot.id}}" style="text-decoration: none; color: black;">Edit</a>
                         <a href="/delete/{{twoot.id}}" style="text-decoration: none; color: black;">Delete</a>
                     </div>
-                    {% else %}
-                    <p></p>
-                    {% endif %}
                 </div>
                 <p class="twoot-content">{{twoot.content}}</p>
                 <div class="twoot-foot">
                     {% if twoot.is_edited == True %}
-                    <p class="twoot-id">(edited)</p>
+                    <p class="twoot-id">Id: {{twoot.id}} (edited)</p>
                     {% else %}
-                    <p class="twoot-id"></p>
+                    <p class="twoot-id">Id: {{twoot.id}}</p>
                     {% endif %}
                     <p class="twoot-date-created">{{twoot.date_created.date()}}</p>
                 </div>

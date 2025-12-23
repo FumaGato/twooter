@@ -47,7 +47,7 @@ body {
 }
 
 .main-container {
-    width: 40em;
+    width: 40rem;
 }
 
 .upper-container {
@@ -58,13 +58,13 @@ body {
     align-items: center;
 }
 
-.upper-container img {
-    width: 30px;
-    height: 30px;
+.action-button {
+    width: 35px;
+    height: 35px;
     transition: transform 0.2s ease;
 }
 
-.upper-container img:hover {
+.action-button:hover {
     transform: scale(1.1);
 }
 
@@ -75,7 +75,7 @@ body {
 
 .twoot {
     background-color: white;
-    border: 2px solid black;
+    border: 4px solid black;
     border-radius: 10px;
     padding-left: 20px;
     padding-right: 20px;
@@ -84,7 +84,15 @@ body {
 .twoot-head {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+}
+
+.twoot-update a {
+    transition: transform 0.2s ease;
+}
+
+.twoot-update a:hover {
+    transform: scale(1.2);
 }
 
 .twoot-pfp {
@@ -96,4 +104,31 @@ body {
 .twoot-foot {
     display: flex;
     justify-content: space-between;
+}
+
+.submit-button {
+    font-family: "Atma", system-ui;
+    font-weight: 500;
+    font-size: 16px;
+    font-style: normal;
+    transition: transform 0.2s ease;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: white;
+    border-style: none;
+    text-decoration: underline;
+}
+
+.submit-button:hover {
+    transform: scale(1.2);
+}
+
+.github {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.2s ease;
+}
+
+.github:hover {
+    transform: scale(1.2);
 }
