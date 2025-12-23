@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>twoo:3r | Home</title>
+{% endblock %}
+
+{% block body %}
+<h2>Home</h2>
+<div class="main-container">
+    <div class="upper-container">
+        <div class="user-stuff" style="display: flex; align-items: center; gap: 16px;">
+            <a href="{{ url_for('logout')}}">
+                <img src="/static/images/logout-icon.png" alt="">
+            </a>
+            <h4>{{user}}</h4>
+        </div>
+        <a href="{{ url_for('twoot')}}">
+            <img src="/static/images/post-icon.png" alt="Post">
+        </a>
+    </div>
+    <div class="twoots-container">
+        {% if twoots|length < 1 %} <h2>No twoots ;w;</h2>
+            {% else %}
+            {% for twoot in twoots %}
+            <div class="twoot">
+                <div class="twoot-head">
+                    {% if twoot.user == "Fuma" %}
+                    <img class="twoot-pfp" src="/static/images/fuma-pfp.jpeg">
+                    {% elif twoot.user == "Vyn" %}
+                    <img class="twoot-pfp" src="/static/images/vyn-pfp.jpg">
+                    {% else %}
+                    <img class="twoot-pfp" src="/static/images/default-pfp.jpg">
+                    {% endif %}
+                    <h4 class="twoot-user">{{twoot.user}}</h4>
+                </div>
+                <p class="twoot-content">{{twoot.content}}</p>
+                <div class="twoot-foot">
+                    <p class="twoot-id"></p>
+                    <p class="twoot-date-created">{{twoot.date_created.date()}}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+    </div>
+</div>
+{% endblock %}

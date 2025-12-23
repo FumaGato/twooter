@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>twoo:3r | Login</title>
+{% endblock %}
+
+{% block body %}
+<h2>Login (not an actual login)</h2>
+<p>Helo and welcome to twoo:3r !!! <br>
+    But first enter ur name plsss</p>
+<p>Suggestion: {{nm_suggestion}}</p>
+<form action="/login" method="POST">
+    <input type="text" name="username" placeholder="Enter name here" required>
+    <input type="submit" value="Enter now !!!">
+</form>
+<a href="https://youtu.be/dQw4w9WgXcQ?si=eTnQIvQ7HFBQSJL4" target="_blank"><button>I'm just gonna leave</button></a>
+{% endblock %}
