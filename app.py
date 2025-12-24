@@ -8,9 +8,12 @@ app = Flask(__name__)
 app.secret_key = "twoo:3er_uwu_123"
 app.permanent_session_lifetime = timedelta(days=7)
 
+# Supabase password: twoo:3ruwu2101
+
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = \
-    'sqlite:///' + os.path.join(BASE_DIR, 'database.db')
+DATABASE_URL = os.getenv("DATABASE_URL")
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 
