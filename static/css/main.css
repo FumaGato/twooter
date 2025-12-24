@@ -132,3 +132,48 @@ body {
 .github:hover {
     transform: scale(1.2);
 }
+
+.twoot-content {
+    font-family: "Atma", system-ui;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1rem;
+    border: none;
+    resize: none;
+    width: 100%;
+    min-width: 0%;
+    height: fit-content;
+    box-sizing: border-box;
+
+}
+
+.twoot-content:focus {
+    outline: none;
+}
+
+.twoot-content-display {
+    max-width: 100%;
+    min-width: 0;
+}
+
+.twoot-content-display pre {
+    font-family: "Atma", system-ui;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1rem;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.name-box {
+    font-family: "Atma", system-ui;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1rem;
+    border: none;
+}
+
+.name-box:focus {
+    outline: none;
+}

@@ -17,7 +17,7 @@ db = SQLAlchemy(app)
 class Twoot(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.String(32), nullable=False)
-    content = db.Column(db.String(140), nullable=False)
+    content = db.Column(db.String(320), nullable=False)
     is_edited = db.Column(db.Boolean, default=False, nullable=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 

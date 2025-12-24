@@ -60,7 +60,9 @@
                     <p></p>
                     {% endif %}
                 </div>
-                <p class="twoot-content">{{twoot.content}}</p>
+                <div class="twoot-content-display">
+                    <pre>{{twoot.content}}</pre>
+                </div>
                 <div class="twoot-foot">
                     {% if twoot.is_edited == True %}
                     <p class="twoot-id">(edited)</p>

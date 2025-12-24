@@ -32,7 +32,9 @@
                         <a href="/delete/{{twoot.id}}" style="text-decoration: none; color: black;">Delete</a>
                     </div>
                 </div>
-                <p class="twoot-content">{{twoot.content}}</p>
+                <div class="twoot-content-display">
+                    <pre>{{twoot.content}}</pre>
+                </div>
                 <div class="twoot-foot">
                     {% if twoot.is_edited == True %}
                     <p class="twoot-id">Id: {{twoot.id}} (edited)</p>

@@ -24,9 +24,10 @@
             <p></p>
         </div>
         <form action="/edit/{{twoot.id}}" method="POST">
-            <input type="text" name="content" maxlength="140" placeholder="Type something here"
-                value="{{twoot.content}}" autocomplete="off" required
-                style="border-style: none; height: 60px; min-width: 585px;">
+            <div>
+                <textarea name="content" class="twoot-content" rows="5" maxlength="320"
+                    placeholder="Type something here..." required>{{twoot.content}}</textarea>
+            </div>
             <div class="twoot-foot">
                 <p></p>
                 <input type="submit" value="Done" class="submit-button">
