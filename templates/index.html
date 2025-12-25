@@ -34,7 +34,7 @@
         {% endif %}
     </div>
     <div class="twoots-container">
-        {% if twoots|length < 1 %} <h2>No twoots ;w;</h2>
+        {% if twoots|length < 1 %} <h2 style="text-align: center;">No twoots ;w;</h2>
             {% else %}
             {% for twoot in twoots %}
             <div class="twoot">
@@ -61,7 +61,14 @@
                     {% endif %}
                 </div>
                 <div class="twoot-content-display">
-                    <pre>{{twoot.content}}</pre>
+                    <div class="twoot-twoot">
+                        <pre>{{twoot.content}}</pre>
+                    </div>
+                    <div class="twoot-image">
+                        {% if twoot.image %}
+                        <img src="{{url_for('static', filename='uploads/' + twoot.image)}}" , width="240">
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="twoot-foot">
                     {% if twoot.is_edited == True %}

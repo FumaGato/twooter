@@ -23,16 +23,44 @@
             </div>
             <p></p>
         </div>
-        <form action="/twoot" method="POST">
+        <form action="/twoot/upload" method="POST" enctype="multipart/form-data">
             <div>
                 <textarea name="content" class="twoot-content" rows="5" maxlength="320"
                     placeholder="Type something here..." required></textarea>
             </div>
+            <div id="imagePreview">
+                <!-- Nothing here yet -->
+            </div>
             <div class="twoot-foot">
-                <p></p>
+                <input type="file" name="image" id="image" accept=".png, .jpg, .jpeg, .gif" style="display: none;"
+                    onchange="showFileName(this)">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <label for="image" style="margin-top: 8px;"><img src="/static/images/image-icon.png"
+                            alt="Attach image" class="action-button"></label>
+                    <span id="fileName"></span>
+                    <input type="button" onclick="clearSelection()" value="Clear">
+                </div>
                 <input type="submit" value="twoot" class="submit-button">
             </div>
         </form>
     </div>
 </div>
+<script>
+    function showFileName(input) {
+        const fileNameSpan = document.getElementById('fileName');
+        if (input.files && input.files.length > 0) {
+            fileNameSpan.textContent = input.files[0].name;
+        } else {
+            fileNameSpan.textContent = '';
+        }
+    }
+    function clearSelection() {
+        const fileInput = document.getElementById('image');
+        const fileNameSpan = document.getElementById('fileName');
+        fileInput.value = '';
+        fileNameSpan.textContent = '';
+    }
+
+</script>
+
 {% endblock %}
