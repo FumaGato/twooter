@@ -37,7 +37,7 @@
         {% if twoots|length < 1 %} <h2 style="text-align: center;">No twoots ;w;</h2>
             {% else %}
             {% for twoot in twoots %}
-            <div class="twoot">
+            <div class="twoot" id="twoot{{twoot.id}}">
                 <div class="twoot-head">
                     <div class="twoot-profile" style="display: flex; align-items: center; gap: 10px;">
                         {% if twoot.user == "Fuma" %}
@@ -53,8 +53,10 @@
                     </div>
                     {% if user == twoot.user %}
                     <div class="twoot-update" style="display: flex; align-items: center; gap: 10px;">
-                        <a href="/edit/{{twoot.id}}" style="text-decoration: none; color: black;">Edit</a>
-                        <a href="/delete/{{twoot.id}}" style="text-decoration: none; color: black;">Delete</a>
+                        <a href="/edit/{{twoot.id}}" style="text-decoration: none; color: black;">
+                            <button class="submit-button">Edit</button>
+                        </a>
+                        <button onclick="deleteTwoot({{twoot.id}})" class="submit-button">Delete</button>
                     </div>
                     {% else %}
                     <p></p>
@@ -64,10 +66,10 @@
                     <div class="twoot-twoot">
                         <pre>{{twoot.content}}</pre>
                     </div>
-                    <div class="twoot-img-container" , style="padding: 10px;">
+                    <div class="twoot-img-container" style="padding: 10px;">
                         {% if twoot.image %}
-                        <img src="{{url_for('static', filename='uploads/' + twoot.image)}}" , width="50%" ,
-                            class="twoot-img" , onclick="resizeImg(this)">
+                        <img src="{{url_for('static', filename='uploads/' + twoot.image)}}" width="50%"
+                            class="twoot-img" onclick="resizeImg(this)">
                         {% endif %}
                     </div>
                 </div>

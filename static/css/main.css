@@ -58,14 +58,6 @@ body {
     justify-content: space-between;
 }
 
-.twoot-update a {
-    transition: transform 0.2s ease;
-}
-
-.twoot-update a:hover {
-    transform: scale(1.2);
-}
-
 .twoot-pfp {
     width: 40px;
     height: 40px;
@@ -113,8 +105,8 @@ body {
     resize: none;
     width: 100%;
     min-width: 0%;
-    height: fit-content;
     box-sizing: border-box;
+    field-sizing: content;
 }
 
 .twoot-content:focus {

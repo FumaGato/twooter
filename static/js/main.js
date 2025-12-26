@@ -26,3 +26,16 @@ function resizeImg(img) {
         img.style.width = '50%';
     }
 }
+
+function deleteTwoot(id) {
+    fetch(`delete/${id}`, {
+        method: 'DELETE'
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                const row = document.getElementById(`twoot${id}`)
+                row.remove()
+            }
+        })
+}
