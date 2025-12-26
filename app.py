@@ -1,7 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
-from werkzeug.utils import secure_filename
 import os
 import uuid
 import random
@@ -79,25 +78,23 @@ def edit(id):
         return render_template("edit.html", twoot=twoot_to_edit)
 
 
-@app.route("/delete/<int:id>")
+@app.route("/delete/<int:id>", methods=["DELETE"])
 def delete(id):
     if "user" in session:
         pass
     else:
         return redirect(url_for("login"))
 
-    twoot_to_del = Twoot.query.get_or_404(id)
+    twoot = Twoot.query.get_or_404(id)
     try:
-        if twoot_to_del.image:
+        if twoot.image:
             try:
-                os.remove(UPLOAD_FOLDER + "/" + twoot_to_del.image)
+                os.remove(UPLOAD_FOLDER + "/" + twoot.image)
             except:
                 pass
-        db.session.delete(twoot_to_del)
+        db.session.delete(twoot)
         db.session.commit()
-        if session["user"] == "fumafuamuf2101":
-            return redirect(url_for("admin"))
-        return redirect(url_for("index"))
+        return jsonify({"success": True})
     except:
         return "Failed to delete"
 
