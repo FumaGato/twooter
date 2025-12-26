@@ -32,35 +32,22 @@
                 <!-- Nothing here yet -->
             </div>
             <div class="twoot-foot">
-                <input type="file" name="image" id="image" accept=".png, .jpg, .jpeg, .gif" style="display: none;"
-                    onchange="showFileName(this)">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <label for="image" style="margin-top: 8px;"><img src="/static/images/image-icon.png"
+                <div style="display: flex; align-items: center; gap: 8px;">
+
+                    <input type="file" name="image" id="image" accept=".png, .jpg, .jpeg, .gif" style="display: none;"
+                        onchange="showFileName(this)">
+                    <label for="image" style="margin-top: 6px;"><img src="/static/images/image-icon.png"
                             alt="Attach image" class="action-button"></label>
                     <span id="fileName"></span>
-                    <input type="button" onclick="clearSelection()" value="Clear">
+
+                    <input type="button" onclick="clearSelection()" value="Clear" id="clearButton"
+                        style="display: none;">
+                    <label for="clearButton" class="submit-button" id="clearButtonLabel"></label>
+
                 </div>
                 <input type="submit" value="twoot" class="submit-button">
             </div>
         </form>
     </div>
 </div>
-<script>
-    function showFileName(input) {
-        const fileNameSpan = document.getElementById('fileName');
-        if (input.files && input.files.length > 0) {
-            fileNameSpan.textContent = input.files[0].name;
-        } else {
-            fileNameSpan.textContent = '';
-        }
-    }
-    function clearSelection() {
-        const fileInput = document.getElementById('image');
-        const fileNameSpan = document.getElementById('fileName');
-        fileInput.value = '';
-        fileNameSpan.textContent = '';
-    }
-
-</script>
-
 {% endblock %}
