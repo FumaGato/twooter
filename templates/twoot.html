@@ -23,16 +23,34 @@
             </div>
             <p></p>
         </div>
-        <form action="/twoot" method="POST">
+        <form action="/twoot/upload" method="POST" enctype="multipart/form-data">
             <div>
-                <textarea name="content" class="twoot-content" rows="5" maxlength="320"
-                    placeholder="Type something here..." required></textarea>
+                <textarea name="content" class="twoot-content" maxlength="320" placeholder="Type something here..."
+                    required></textarea>
+            </div>
+            <div id="imagePreview">
+                <!-- Nothing here yet -->
             </div>
             <div class="twoot-foot">
-                <p></p>
+                <div style="display: flex; align-items: center; gap: 8px;">
+
+                    <input type="file" name="image" id="image" accept=".png, .jpg, .jpeg, .gif" style="display: none;"
+                        onchange="showFileName(this)">
+                    <label for="image" style="margin-top: 6px;"><img src="/static/images/image-icon.png"
+                            alt="Attach image" class="action-button"></label>
+                    <span id="fileName"></span>
+
+                    <div style="display: flex;">
+                        <input type="button" onclick="clearSelection()" value="Clear" id="clearButton"
+                            style="display: none;">
+                        <label for="clearButton" class="submit-button" id="clearButtonLabel"></label>
+                    </div>
+
+                </div>
                 <input type="submit" value="twoot" class="submit-button">
             </div>
         </form>
     </div>
 </div>
+
 {% endblock %}
