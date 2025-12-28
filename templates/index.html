@@ -68,8 +68,7 @@
                     </div>
                     <div class="twoot-img-container" style="padding: 10px;">
                         {% if twoot.image_url %}
-                        <img src="{{url_for('static', filename='uploads/' + twoot.image_url)}}" width="50%"
-                            class="twoot-img" onclick="resizeImg(this)">
+                        <img src="{{twoot.image_url}}" width="50%" class="twoot-img" onclick="resizeImg(this)">
                         {% endif %}
                     </div>
                 </div>

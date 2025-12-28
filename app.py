@@ -2,8 +2,18 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 import os
-import uuid
 import random
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+import os
+
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    secure=True
+)
 
 app = Flask(__name__)
 
@@ -22,17 +32,17 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
-UPLOAD_FOLDER = "static/uploads"
+# UPLOAD_FOLDER = "static/uploads"
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
-app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+# app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
 class Twoot(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.String(32), nullable=False)
     content = db.Column(db.String(320), nullable=False)
-    # image = db.Column(db.String(800), nullable=False)
     image_url = db.Column(db.Text, nullable=True)
+    image_public_id = db.Column(db.Text, nullable=True)
     is_edited = db.Column(db.Boolean, default=False, nullable=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -89,13 +99,14 @@ def delete(id):
         return redirect(url_for("login"))
 
     twoot = Twoot.query.get_or_404(id)
+
     if twoot.image_url:
-        try:
-            os.remove(UPLOAD_FOLDER + "/" + twoot.image_url)
-        except:
-            pass
+        public_id = twoot.image_public_id
+        cloudinary.uploader.destroy(public_id)
+
     db.session.delete(twoot)
     db.session.commit()
+
     return jsonify({"success": True})
 
 
@@ -106,18 +117,22 @@ def allowed_file(filename):
 @app.route("/twoot/upload", methods=["POST"])
 def upload():
     content = request.form["content"]
-    content_file = request.files.get("image")
+    content_file = request.files["image"]
 
-    filename = None
-    if content_file and content_file.filename != "" and allowed_file(content_file.filename):
-        ext = os.path.splitext(content_file.filename)[1]
+    # Upload image to cloud
+    if content_file:
+        try:
+            result = cloudinary.uploader.upload(
+                content_file, folder="twoot_uploads")
+        except:
+            return "File size too large"
+        image_url = result["secure_url"]
+        public_id = result["public_id"]
 
-        filename = f"{uuid.uuid4().hex}{ext}"
-        content_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-        image = app.config["UPLOAD_FOLDER"] + "/" + filename
+    twoot = Twoot(user=session["user"], content=content,
+                  image_url=image_url, image_public_id=public_id)
 
-    twoot = Twoot(user=session["user"], content=content, image_url=filename)
-
+    # Save twoot to database
     db.session.add(twoot)
     db.session.commit()
 
