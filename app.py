@@ -89,18 +89,14 @@ def delete(id):
         return redirect(url_for("login"))
 
     twoot = Twoot.query.get_or_404(id)
-    try:
-        if twoot.image:
-            try:
-                os.remove(UPLOAD_FOLDER + "/" + twoot.image)
-            except:
-                pass
-        print("Deleted:", id)
-        db.session.delete(twoot)
-        db.session.commit()
-        return jsonify({"success": True})
-    except:
-        return "Failed to delete"
+    if twoot.image_url:
+        try:
+            os.remove(UPLOAD_FOLDER + "/" + twoot.image_url)
+        except:
+            pass
+    db.session.delete(twoot)
+    db.session.commit()
+    return jsonify({"success": True})
 
 
 def allowed_file(filename):
